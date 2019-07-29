@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIClient", "APIClient\APIClient.csproj", "{57E90C76-418B-4B68-A80A-58FD1AC4FDC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admiss", "Admiss\Admiss.csproj", "{6503439B-B8C2-41AC-A53F-347AE95D68B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminAPIAdmiss", "AdminAPIAdmiss\AdminAPIAdmiss.csproj", "{6162045F-FEFE-4196-8925-16E377131C60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57E90C76-418B-4B68-A80A-58FD1AC4FDC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E90C76-418B-4B68-A80A-58FD1AC4FDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E90C76-418B-4B68-A80A-58FD1AC4FDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E90C76-418B-4B68-A80A-58FD1AC4FDC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6503439B-B8C2-41AC-A53F-347AE95D68B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6503439B-B8C2-41AC-A53F-347AE95D68B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6503439B-B8C2-41AC-A53F-347AE95D68B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6503439B-B8C2-41AC-A53F-347AE95D68B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6162045F-FEFE-4196-8925-16E377131C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6162045F-FEFE-4196-8925-16E377131C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6162045F-FEFE-4196-8925-16E377131C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6162045F-FEFE-4196-8925-16E377131C60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1099C70-A1EB-4C8A-8AFC-F17DE4966BEE}
+	EndGlobalSection
+EndGlobal

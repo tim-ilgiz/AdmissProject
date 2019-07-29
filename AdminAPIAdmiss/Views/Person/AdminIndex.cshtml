@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AdminAPIAdmiss.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Создание заявки";
+}
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Создать новую заявку", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.CompanyId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Admin","AdminEdit", new { id = item.Id }) |
+                @Html.ActionLink("Детали", "AdminDetail", "Admin",null, new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Admin","AdminDelete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

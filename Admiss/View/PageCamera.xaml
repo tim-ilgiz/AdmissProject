@@ -1,0 +1,67 @@
+﻿<UserControl  x:Class="Admiss.View.PageCamera"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Admiss.View"
+      mc:Ignorable="d" 
+      Height="1560" Width="1080"
+      xmlns:vm="clr-namespace:Admiss.ViewModel"
+      xmlns:view="clr-namespace:Admiss.View" 
+      Background="{StaticResource BackGroundAll}">
+
+    <UserControl.DataContext>
+        <vm:PageCameraViewModel/>
+    </UserControl.DataContext>
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border  Grid.ColumnSpan="2" Style="{StaticResource Line_border}"/>
+            <StackPanel Margin="0,20,0,0">
+
+                <TextBlock Margin="0,50,0,20" HorizontalAlignment="Center" FontSize="25" Text="Процедура сравнения фотографии" Foreground="White"/>
+                <TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Margin="50,20,50,0" FontSize="20" Foreground="White">
+                        Этап 1. Распознание вашего лица
+                        <LineBreak/>
+                        1. Поместите изображение вашего лица в прямоугольную, выделенную зеленым цветом зону. <LineBreak/>
+                        2. Нажмите кнопку "Сделать фото" для фиксации вашего изображения <LineBreak/>
+                        3. Для более точного результата, постарайтесь не перемещаться в процессе выполнения фотографии. Система работает быстро, и не займет у вас на это много времени. <LineBreak/>
+                        4. Вслучае ошибки повторите алгоритм с п.2  <LineBreak/>
+                        5. Если все впорядке, нажмите на кнопку "Подтвердить". <LineBreak/>
+                        После этого вы автоматически получите пропуск. Срок действия пропуска просим узнать у ответственного лица, который выписал вам заявку на выдачу пропуска. <LineBreak/>
+                                     <LineBreak/> 
+                        Примечение: <LineBreak/> 
+                    Если камера не увидела вашего лица, фотография сделана не будет. Устройство работает только при наличии изображения контура вашего лица и глаз.
+                </TextBlock>
+            </StackPanel>
+
+            <Grid HorizontalAlignment="Center" Margin="0,100,40,0" Grid.Row="1">
+                <Border BorderThickness="1" BorderBrush="White">
+                    <Image Height="480" Width="640" Source="{Binding CameraCapture.VideoImage}"/>
+                </Border>
+                <Image Panel.ZIndex="2" Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               Source="{Binding CameraCapture.ScreenImage}" Visibility="{Binding IsVisible}"/>
+                <!--IsVisible -> Убирает фото при работе вебкамеры. После фото -> Visible-->
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,150,0,0">
+                <Button Command="{Binding Back}" Content="Назад"
+                        Height="{Binding ElementName=buttonPhoto, Path=Height}" Width="150" Style="{StaticResource Button_St}" Margin="50,0,0,0"/>
+                <Button x:Name="buttonPhoto" Command="{Binding Reload_Photo}" Content="Переснять" Margin="50,0,50,0" 
+                        Height="150" Width="150" Style="{StaticResource Button_St}" IsEnabled="{Binding CameraCapture.ReloadButtonEnable}"/>
+
+                <Button Command="{Binding Complete}" Content="Подтвердить" Margin="0,0,50,0"
+                        Height="{Binding ElementName=buttonPhoto, Path=Height}" Width="150" 
+                        Style="{StaticResource Button_St}" IsEnabled="{Binding CameraCapture.ReloadButtonEnable}"/>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>
+                                                                                               

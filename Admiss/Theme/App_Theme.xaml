@@ -1,0 +1,512 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm ="clr-namespace:Admiss.ViewModel"
+                    xmlns:view ="clr-namespace:Admiss.View">
+
+    <DataTemplate DataType="{x:Type vm:Page1ViewModel}">
+        <view:Page1View/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:PageCameraViewModel}">
+        <view:PageCamera/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:InfoViewModel}">
+        <view:InfoView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ResultLoadViewModel}">
+        <view:ResultLoadView/>
+    </DataTemplate>
+    <Brush x:Key="BackGroundAll">#014076</Brush>
+    <Color x:Key="DrOrange">#ff6805</Color>
+    <Color x:Key="DrWhite">White</Color>
+    <Color x:Key="DrWheat">Wheat</Color>
+    <Color x:Key="DrDarkOrange">#fc3424</Color>
+    <Color x:Key="DrBlack">#232323</Color>
+    <Color x:Key="DrGray">#dddcda</Color>
+    <CornerRadius x:Key="DrCornerRad">15</CornerRadius>
+    <FontFamily x:Key="DrFont">Arial</FontFamily>
+    <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+    <Style x:Name="buttonst" x:Key="Button_St"  TargetType="{x:Type Button}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Height" Value="200"/>
+        <Setter Property="Panel.ZIndex" Value="3"/>
+        <Setter Property="Background" Value="#014076" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontFamily" Value="./#PF BeauSans Pro"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="Black" Opacity="50" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border1" CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="4" BorderBrush="White">
+                        <Grid>
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#022B51" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#021B32" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" Direction="310" ShadowDepth="0" Opacity="0.3"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource Button_St}" 
+           x:Key="ButtonElse" 
+           TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border1" CornerRadius="10" Background="#014076" BorderThickness="5" BorderBrush="White">
+                        <Grid>
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="Button.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="border1" 
+                                        AutoReverse="True" 
+                                        Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" 
+                                        To="#014076" 
+                                        RepeatBehavior="Forever" 
+                                        Duration="0:0:1.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderTemplate" TargetType="{x:Type Slider}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Red" BorderThickness="9" Width="10" Height="400"/>
+                        <Track>
+                            <Track.Thumb>
+                                <Thumb x:Name="Thumb" Background="Red">
+                                    <Thumb.Template>
+                                        <ControlTemplate>
+                                            <Grid>
+                                                <Ellipse Height="100" Width="100" StrokeThickness="10" Fill="Red">
+
+                                                </Ellipse>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="MainStyle">
+        <Setter Property="Control.FontFamily" Value="{StaticResource DrFont}"/>
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource DrBlack}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Control.Background">
+            <Setter.Value>
+                <LinearGradientBrush SpreadMethod="Reflect" StartPoint="0,0" EndPoint="0.5,0">
+                    <GradientStop Color="#dddcda" Offset="0"/>
+                    <GradientStop Color="White" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type Border}" x:Key="Line_border">
+        <Setter Property="Height" Value="2"/>
+        <Setter Property="Width" Value="500"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Margin" Value="0,20,0,0"/>
+    </Style>
+    
+    <Style x:Key="ClockStyle">
+        <Setter Property="Control.FontFamily" Value="{StaticResource DrFont}"/>
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource DrBlack}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Control.Background">
+            <Setter.Value>
+                <LinearGradientBrush SpreadMethod="Reflect" StartPoint="0,0" EndPoint="0.5,0">
+                    <GradientStop Color="{StaticResource DrWhite}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource DrOrange}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="4" />
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource DrDarkOrange}"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness" Value="6" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BorderSimpleStyle" TargetType="{x:Type Border}">
+        <Setter Property="Border.Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,0">
+                    <GradientStop Color="{StaticResource DrOrange}" Offset="0"/>
+                    <GradientStop Color="{StaticResource DrDarkOrange}" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource DrBlack}"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness" Value="4" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonMediaStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ButtonSimpleStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RadioButtonSimpleStyle" TargetType="RadioButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonLast">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="0,12,12,0" Background="White" BorderBrush="#EBEAE9"  >
+                        <ContentPresenter x:Name="contentPresenter" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="FullSearchStyle">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border  Background="White" BorderBrush="#EBEAE9"  >
+                        <ContentPresenter x:Name="contentPresenter" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}" x:Name="myTextBox">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate >
+                    <Border Background="White" BorderBrush="White" BorderThickness="0" CornerRadius="12,0,0,12">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}" x:Name="myComboBox">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate >
+                    <VirtualizingStackPanel IsVirtualizing="True"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PathSimpleStyle" TargetType="Path">
+        <Setter Property="Fill" Value="Transparent" />
+        <Setter Property="Opacity" Value="0.5"/>
+        <Setter Property="Stretch" Value="Fill" />
+        <Setter Property="RenderTransformOrigin" Value="0.508,0.487"/>
+        <Setter Property="Stroke" Value="Black"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+    </Style>
+
+    <!--Текст внутри кнопок и др. контролов-->
+    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Control.FontFamily" Value="{StaticResource DrFont}"/>
+        <Setter Property="Control.FontSize" Value="24"/>
+        <Setter Property="Control.FontWeight" Value="Bold"/>
+        <Setter Property="Control.HorizontalAlignment" Value="Center"/>
+        <Setter Property="Control.VerticalAlignment" Value="Center"/>
+        <Setter Property="Control.Background" Value="Transparent" />
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource DrWhite}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="Ru">
+                <Setter Property="Text" Value="{Binding Title}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="En">
+                <Setter Property="Text" Value="{Binding TitleEn}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="Ch">
+                <Setter Property="Text" Value="{Binding TitleCh}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Текст для объекта результата поиска-->
+    <Style x:Key="TextBlockSearchStyle" TargetType="TextBlock">
+        <Setter Property="Control.FontFamily" Value="{StaticResource DrFont}"/>
+        <Setter Property="Control.FontSize" Value="24"/>
+        <Setter Property="Control.FontWeight" Value="Bold"/>
+        <Setter Property="Control.HorizontalAlignment" Value="Center"/>
+        <Setter Property="Control.VerticalAlignment" Value="Center"/>
+        <Setter Property="Control.Background" Value="Transparent" />
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource DrWhite}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=xSearch, Path=CurrentLanguage}" Value="Ru">
+                <Setter Property="Text" Value="{Binding Title}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xSearch, Path=CurrentLanguage}" Value="En">
+                <Setter Property="Text" Value="{Binding TitleEn}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xSearch, Path=CurrentLanguage}" Value="Ch">
+                <Setter Property="Text" Value="{Binding TitleCh}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Текст заголовков-->
+    <Style x:Key="TextTitleStyle" TargetType="TextBlock">
+        <Setter Property="Control.FontFamily" Value="{StaticResource DrFont}"/>
+        <Setter Property="Control.FontSize" Value="30"/>
+        <Setter Property="Control.FontWeight" Value="Bold"/>
+        <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+        <Setter Property="Control.VerticalAlignment" Value="Center"/>
+        <Setter Property="Control.Background" Value="Transparent" />
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource DrBlack}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="Ru">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.Title}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="En">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.TitleEn}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="Ch">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.TitleCh}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextTitleStyleView" TargetType="TextBlock">
+        <Setter Property="Control.FontFamily" Value="{StaticResource DrFont}"/>
+        <Setter Property="Control.FontSize" Value="30"/>
+        <Setter Property="Control.FontWeight" Value="Bold"/>
+        <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+        <Setter Property="Control.VerticalAlignment" Value="Center"/>
+        <Setter Property="Control.Background" Value="Transparent" />
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource DrBlack}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=xPathInfoView, Path=CurrentLanguage}" Value="Ru">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.Title}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xPathInfoView, Path=CurrentLanguage}" Value="En">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.TitleEn}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xPathInfoView, Path=CurrentLanguage}" Value="Ch">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.TitleCh}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Текст описания-->
+    <Style x:Key="TextDescriptionStyle" TargetType="TextBlock">
+        <Setter Property="Control.FontFamily" Value="{StaticResource DrFont}"/>
+        <Setter Property="Control.FontSize" Value="26"/>
+        <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+        <Setter Property="Control.VerticalAlignment" Value="Center"/>
+        <Setter Property="Control.Background" Value="Transparent" />
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource DrBlack}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="Ru">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.Description}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="En">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.DescriptionEn}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="Ch">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.DescriptionCh}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Текст основного контента-->
+    <Style x:Key="TextContentStyle" TargetType="TextBlock">
+        <Setter Property="Control.FontFamily" Value="{StaticResource DrFont}"/>
+        <Setter Property="Control.FontSize" Value="24"/>
+        <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+        <Setter Property="Control.VerticalAlignment" Value="Center"/>
+        <Setter Property="Control.Background" Value="Transparent" />
+        <Setter Property="Control.Foreground">
+            <Setter.Value>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource DrBlack}"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="Ru">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.Content}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="En">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.ContentEn}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=xHome, Path=CurrentLanguage}" Value="Ch">
+                <Setter Property="Text" Value="{Binding CurrentMapObject.ContentCh}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--отключает дефолтную подсветку элемента-->
+    <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--стиль listbox для страницы поиска-->
+    <Style x:Key="ListBoxSearchItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <ContentPresenter VerticalAlignment="Top"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

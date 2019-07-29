@@ -1,0 +1,64 @@
+﻿@model IEnumerable<APIaspConnection.DataBase.Person>
+
+@{
+    ViewBag.Title = "Создание заявки";
+}
+
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Создать новую заявку", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SecretNumberCode)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patronymic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartData)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndData)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SecretNumberCode)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
